@@ -1,0 +1,16 @@
+#+TITLE: tack
+#+AUTHOR: Michael Hunsinger
+
+=tack= is a place for me write about algorithms and data structures. Inspired by the quote,
+
+#+BEGIN_QUOTE
+You don't really learn something until you teach it.
+#+END_QUOTE
+
+I hope to have a better understanding of these things and hopefully help others along the way. The
+goal is to start out with the basics and advance to more difficult concepts. If you come across
+anything that is wrong or is unclear, please open an issue. Content will continually be added until
+I feel like a topic has been fully covered and I have a clear understanding.
+
+* Topics
+  - [[./trees/trees.org][Trees]]

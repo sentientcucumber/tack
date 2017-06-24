@@ -1,0 +1,29 @@
+#+TITLE: Find Bottom Left Tree Value
+
+Posted on [[https://leetcode.com/problems/find-bottom-left-tree-value/#/description][LeetCode]].
+
+Given a binary tree, find the left most value in the last row of the tree.
+
+#+BEGIN_SRC java
+  public class Solution {
+
+      public int findBottomLeftValue(TreeNode root) {
+          Queue<TreeNode> queue = new LinkedList<>();
+          TreeNode cursor = null;
+          queue.offer(root);
+          
+          while (!queue.isEmpty()) {
+              cursor = queue.poll();
+              
+              if (cursor.right != null) {
+                  queue.offer(cursor.right);
+              }
+              if (cursor.left != null) {
+                  queue.offer(cursor.left);
+              }
+          }
+          
+          return cursor.val;
+      }
+  }
+#+END_SRC
