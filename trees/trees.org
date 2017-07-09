@@ -1,5 +1,80 @@
 #+TITLE: Trees
 #+AUTHOR: Michael Hunsinger
 
-* Related Problems
-  [[./problems/find-bottom-left-tree-value.org][Find Bottom Left Tree Value]]
+* Short and Sweet
+  A tree is a hierarchical data structure that consists of nodes. A
+  node has a value and references to it's children nodes. A tree can
+  have at most one root node, from which all other nodes are
+  descendants of.
+* Varieties
+  There are many different types of trees. Some may define an
+  ordering, or balancing, or number of children. 
+
+  - [[*Binary%20Search%20Tree][Binary Search Tree]]
+  - Red-Black Tree
+  - Trie
+  - Heap
+
+* Binary Search Tree
+  A binary search tree (BST) imposes ordering for the nodes. Typically
+  you'll see for any given node in a BST, a node to the left is less
+  than the current node and a node greater than, is to the right. If
+  two nodes are equal, they can fall either on the left or right, as
+  long as it's consistent throughout the tree. For our purposes here,
+  we'll say equal nodes are on the right.
+
+* Sample
+  #+BEGIN_EXAMPLE
+          20
+        /    \
+      10      30
+     /  \    /  \
+    5   15  25   35
+  #+END_EXAMPLE
+  
+** Time Complexity
+   A cheatsheet for reference
+
+   | Operation | Average  | Worst |
+   |-----------+----------+-------|
+   | Search    | O(log n) | O(n)  |
+   | Insert    | O(log n) | O(n)  |
+   | Remove    | O(log n) | O(n)  |
+
+*** Search
+    Since the tree is ordered, when searching for a value in the tree,
+    we can eliminate half of the possibilities at each level. Let's
+    walk through the steps to search for 15 in the sample tree.
+
+    1. Compare 15 to 20.
+    2. Since 15 is less than 20, and the ordering states all nodes
+       with values less than the current node are on the left, we move
+       the 20's left node.
+    3. Compare 10 to 15.
+    4. Since 15 is greater than 20, and the order states all nodes
+       with values greater than the current node are on the right, we
+       move to 10's right node.
+    5. Compare 15 to 15 -- we've found the node we were searching for!
+
+*** Insert
+    Insert is very similar to search. We walk through the tree's
+    nodes, using the ordering to determine which child we visit
+    next. Anytime we insert a new value into a BST, it will always be
+    a leaf.
+
+*** Delete
+    Delete is a little more tricky than insert and search. Because we
+    need to maintain the ordering, simply removing the node is not
+    always doable. Consider the three cases:
+
+    1. Remove a leaf -- Remove the node.
+    2. Remove an interior node with one child -- Replace the node with
+       it's child.
+    3. Remove an interior node with two children -- Choose the tree's
+       in-order successor (the right subtree's left most node) or
+       in-order predecessor (the left subtree's right most node) to
+       replace it with.
+
+       The successor or predecessor may have a child, in which case
+       would need to be attach to the successor/predecessor's parent
+       (before moving to the deleted node).

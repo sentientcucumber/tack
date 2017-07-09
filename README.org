@@ -1,16 +1,26 @@
 #+TITLE: tack
 #+AUTHOR: Michael Hunsinger
 
-=tack= is a place for me write about algorithms and data structures. Inspired by the quote,
+Inspired by the quotes,
 
 #+BEGIN_QUOTE
-You don't really learn something until you teach it.
+If you want to learn something, read about it.
+If you want to understand something, write about it.
+If you want to master something, teach it.
+-- Yogi Bhajan
 #+END_QUOTE
 
-I hope to have a better understanding of these things and hopefully help others along the way. The
-goal is to start out with the basics and advance to more difficult concepts. If you come across
-anything that is wrong or is unclear, please open an issue. Content will continually be added until
-I feel like a topic has been fully covered and I have a clear understanding.
+#+BEGIN_QUOTE
+It should be possible to explain the laws of physics to a barmaid.
+-- Einstein ([[https://skeptics.stackexchange.com/questions/8742/did-einstein-say-if-you-cant-explain-it-simply-you-dont-understand-it-well-en][maybe]])
+#+END_QUOTE
+
+=tack= is a repository for me to gain a better understanding of
+Computer Science fundamentals by writing, and hopefully, teaching
+others about the subject in an easy-to-understand way.
+
+If you come across anything that is incorrect or poorly explained,
+please open an issue!
 
 * Topics
   - [[./trees/trees.org][Trees]]
