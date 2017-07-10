@@ -1,16 +1,15 @@
 #+TITLE: Trees
 #+AUTHOR: Michael Hunsinger
 
-* Short and Sweet
-  A tree is a hierarchical data structure that consists of nodes. A
-  node has a value and references to it's children nodes. A tree can
-  have at most one root node, from which all other nodes are
-  descendants of.
+A tree is a hierarchical data structure that consists of nodes. A node
+has a value and references to it's children nodes. A tree can have at
+most one root node, from which all other nodes are descendants of.
+
 * Varieties
   There are many different types of trees. Some may define an
   ordering, or balancing, or number of children. 
 
-  - [[*Binary%20Search%20Tree][Binary Search Tree]]
+  - Binary Search Tree
   - Red-Black Tree
   - Trie
   - Heap
@@ -78,3 +77,25 @@
        The successor or predecessor may have a child, in which case
        would need to be attach to the successor/predecessor's parent
        (before moving to the deleted node).
+
+*** Worst Case
+    Imagine converting a sorted array into a tree, starting at the
+    first element and going in sequential order down the array. What
+    will the resulting tree look like?
+    
+    #+BEGIN_EXAMPLE
+      array = [1, 2, 3, 4, 5]
+
+      1
+       \
+        2
+         \
+          3
+           \
+            4
+             \
+              5
+    #+END_EXAMPLE
+    
+    The tree is essentially a list, hence the degraded
+    performance.
