@@ -1,0 +1,152 @@
+#+TITLE: LeetCode
+
+* Two Sum
+** Brute Force
+Iterate through the array. For each number, try another number in the
+array to see if it adds up to the target. Run time is =O(n^2)=.
+** Improved Solution
+Iterate through the array. For each number, find the difference
+between it and the target. Then search the array for that value. If
+the number is present, then we have our two indices.
+
+#+BEGIN_SRC java
+  public class Solution {
+
+      public int[] twoSum(int[] numbers, int target) {
+          for (int i = 0; i < numbers.length; i++) {
+              int diff = target - numbers[i];
+              int j = Arrays.binarySearch(numbers, i + 1, numbers.length, diff);
+
+              if (j > 0) {
+                  return new int[] { i + 1, j + 1 };
+              }
+          }
+
+          // If we've implemented everything correctly, we can assume
+          // this will never be reached because we're guaranteed to find
+          // a solution.
+          return new int[] { -1, -1 };
+      }
+  }
+#+END_SRC
+
+For every item in the array, we need to search for the other number in
+the pair, giving =O(log n)= run time.
+** Optimal Solution
+We could do better by creating a window and narrowing it until the two
+ends are our numbers. The window will be the size of the array to
+start and then narrow based.
+
+#+BEGIN_SRC java
+  public class Solution {
+
+      public int[] twoSum(int[] numbers, int target) {
+          // If the problem stated there may not be a solution, then
+          // we'd need to ensure the array has at least this many
+          // elements.
+          int i = 0, j = numbers.length - 1;
+          
+          while (i < j) {
+              int sum = numbers[i] + numbers[j];
+              if (sum == target) {
+                  return new int[] { i + 1, j + 1 };
+              }
+
+              if (sum < target) {
+                  i++;
+              } else {
+                  j--;
+              }
+          }
+          
+          return new int[] { -1, -1 };
+      }
+  }
+#+END_SRC
+* First Unique Character in a String
+** Brute Force
+Iterating through a string. For each character in the string, iterate
+through the remaining string to see if another character exists. If
+not, return it's index. On the other hand, if the character appears
+later, break out of that loop and continue searching. If the entire
+string is read without finding a repeating character, return -1.
+
+This solution has an =O(n^2)= run time, and =O(1)= space complexity.
+** Improved Solution
+Create an ordered map to store the character count. Iterate through
+the array, adding each character to the map. Then check the map to
+find the first character with only one occurrence. Use that character
+as a lookup in the string.
+
+#+BEGIN_SRC java
+  public class Solution {
+
+      public int firstUniqChar(String s) {
+          Map<Character, Integer> occurrences = new LinkedHashMap<>();
+
+          for (char c : s.toCharArray()) {
+              if (occurrences.containsKey(c)) {
+                  int count = occurrences.get(c);
+                  occurrences.put(c, ++count);
+              } else {
+                  occurrences.put(c, 1);
+              }
+          }
+
+          Character unique = findFirstUniqueCharacter(occurrences);
+          if (unique == null) {
+              return -1;
+          }
+
+          return s.indexOf(unique);
+      }
+
+      private Character findFirstUniqueCharacter(Map<Character, Integer> map) {
+          Set<Map.Entry<Character, Integer>> entries = map.entrySet();
+          for (Map.Entry entry : entries) {
+              if ((Integer) entry.getValue() == 1) {
+                  return (Character) entry.getKey();
+              }
+          }
+
+          return null;
+      }
+  }
+#+END_SRC
+** Optimal Solution
+The above solution got a bit out of hand. There's a lot of code there
+just to check for a unique character. It may be useful if we were
+dealing with an large or unknown data to find if they're unique, but
+we actually know something about it. 
+
+The problem states, /"You may assume the string contain only lowercase
+letters."/. We can use a primitive array to determine whether or not a
+character is unique.
+
+#+BEGIN_SRC java
+  public class Solution {
+
+      public int firstUniqChar(String s) {
+          int[] frequencies = new int[26];
+
+          for (int i = 0; i < s.length(); i++) {
+              int j = getAsciiCode(s.charAt(i));
+              frequencies[j]++;
+          }
+
+          for (int i = 0; i < s.length(); i++) {
+              int j = getAsciiCode(s.charAt(i));
+              if (frequencies[j] == 1) {
+                  return i;
+              }
+          }
+
+          return -1;
+      }
+
+      private int getAsciiCode(char c) {
+          return c - 'a';
+      }
+  }
+
+#+END_SRC
